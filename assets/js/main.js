@@ -36,14 +36,29 @@ radiologia.pop()
 console.log(radiologia)
 
 //3. Imprimir en la página HTML la lista de consultas médicas de Dental
+//codigo propio:
+// const renderDental = () => {
+//     dentalList.innerHTML = ''
+//     dental.forEach((item) => {
+//         dentalList.innerHTML += `<p>${item.hora} - ${item.especialista} - ${item.paciente} - ${item.rut} - ${item.prevision}</p>`
+//     })
+// }
+// renderDental()
+
+//pasar a tabla de boostrap con ayuda de chatgpt:
 const dentalList = document.querySelector("#dentalList")
-const renderDental = () => {
-    dentalList.innerHTML = ''
-    dental.forEach((item) => {
-        dentalList.innerHTML += `<p>${item.hora} - ${item.especialista} - ${item.paciente} - ${item.rut} - ${item.prevision}</p>`
-    })
-}
-renderDental()
+dental.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td>${item.hora}</td>
+        <td>${item.especialista}</td>
+        <td>${item.paciente}</td>
+        <td>${item.rut}</td>
+        <td>${item.prevision}</td>
+    `;
+    dentalList.appendChild(row);
+});
+
 
 //4. Iprimir un listado total de todos los pacientes que se atendieron en el centro médico
 
@@ -57,11 +72,12 @@ const nombresDental = nombresPacientes(dental);
 
 const pacientesTotal = nombresRadiologia.concat(nombresTraumatologia, nombresDental);
 
+
 const listadoPacientes = document.querySelector('#listadoPacientes');
 const renderPacientesTotal = () => {
     listadoPacientes.innerHTML = ''
     pacientesTotal.forEach((nombre) => {
-        listadoPacientes.innerHTML += `<li>${nombre}</li>`
+        listadoPacientes.innerHTML += `<li class="flex-item">${nombre}</li>`
     })
 }
 renderPacientesTotal()
@@ -77,7 +93,7 @@ const listaPacientesDentalIsapre = document.querySelector("#listaPacientesDental
 const renderDentalIsapre = () => {
     listaPacientesDentalIsapre.innerHTML = ''
     dentalIsapre.forEach((item) => {
-        listaPacientesDentalIsapre.innerHTML += `<li>${item.paciente}</li>`
+        listaPacientesDentalIsapre.innerHTML += `<li class="list-group-item">${item.paciente}</li>`
     })
 }
 renderDentalIsapre()
@@ -93,18 +109,45 @@ const listaPacientesTraumaFonasa = document.querySelector("#listaPacientesTrauma
 const renderTraumaFonasa = () => {
     listaPacientesTraumaFonasa.innerHTML = ''
     traumatologiaFonasa.forEach((item) => {
-        listaPacientesTraumaFonasa.innerHTML += `<li>${item.paciente}</li>`
+        listaPacientesTraumaFonasa.innerHTML += `<li class="list-group-item">${item.paciente}</li>`
     })
 }
 renderTraumaFonasa()
 
-//Agregar código para el desafio 2 aquí
 
-document.write(`<p>Cantidad de atenciones para Radiología: ${radiologia.length}</p>`);
-document.write(`<p>Cantidad de atenciones para Traumatología: ${traumatologia.length}</p>`);
-document.write(`<p>Cantidad de atenciones para Dental: ${dental.length}</p>`);
+//se estilizó la seccion de info con chatgpt
+function mostrarInfo(elemento, titulo) {
+    const output = document.getElementById('output');
+    const infoContainer = document.createElement('div');
+    infoContainer.classList.add('info');
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = titulo;
+    infoContainer.appendChild(titleElement);
+
+    elemento.forEach(item => {
+        const patientElement = document.createElement('p');
+        patientElement.textContent = `${item.paciente} - ${item.prevision}`;
+        infoContainer.appendChild(patientElement);
+    });
+
+    const firstLastElement = document.createElement('p');
+    firstLastElement.classList.add('first-last');
+    firstLastElement.textContent = `Primera atención: ${elemento[0].paciente} - ${elemento[0].prevision} | Última atención: ${elemento[elemento.length - 1].paciente} - ${elemento[elemento.length - 1].prevision}`;
+    infoContainer.appendChild(firstLastElement);
+
+    output.appendChild(infoContainer);
+}
+
+mostrarInfo(radiologia, 'Cantidad de atenciones para Radiología: ' + radiologia.length);
+mostrarInfo(traumatologia, 'Cantidad de atenciones para Traumatología: ' + traumatologia.length);
+mostrarInfo(dental, 'Cantidad de atenciones para Dental: ' + dental.length);
+
+// document.write(`<p>Cantidad de atenciones para Radiología: ${radiologia.length}</p>`);
+// document.write(`<p>Cantidad de atenciones para Traumatología: ${traumatologia.length}</p>`);
+// document.write(`<p>Cantidad de atenciones para Dental: ${dental.length}</p>`);
 
 
-document.write(`<p>Primera atencion: ${radiologia[0].paciente} - ${radiologia[0].prevision} | Última atención: ${radiologia[radiologia.length - 1].paciente} - ${radiologia[radiologia.length - 1].prevision}.</p>`);
-document.write(`<p>Primera atencion: ${traumatologia[0].paciente} - ${traumatologia[0].prevision} | Última atención: ${traumatologia[traumatologia.length - 1].paciente} - ${traumatologia[traumatologia.length - 1].prevision}.</p>`);
-document.write(`<p>Primera atencion: ${dental[0].paciente} - ${dental[0].prevision} | Última atención: ${dental[dental.length - 1].paciente} - ${dental[dental.length - 1].prevision}.</p>`);
+// document.write(`<p>Primera atencion: ${radiologia[0].paciente} - ${radiologia[0].prevision} | Última atención: ${radiologia[radiologia.length - 1].paciente} - ${radiologia[radiologia.length - 1].prevision}.</p>`);
+// document.write(`<p>Primera atencion: ${traumatologia[0].paciente} - ${traumatologia[0].prevision} | Última atención: ${traumatologia[traumatologia.length - 1].paciente} - ${traumatologia[traumatologia.length - 1].prevision}.</p>`);
+// document.write(`<p>Primera atencion: ${dental[0].paciente} - ${dental[0].prevision} | Última atención: ${dental[dental.length - 1].paciente} - ${dental[dental.length - 1].prevision}.</p>`);

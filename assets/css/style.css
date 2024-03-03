@@ -1,0 +1,62 @@
+header {
+    background-image: url(../img/nurse-measuring-patient-blood-pressure.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-shadow: 0px 3px 6px black;
+    text-align: center;
+    color: white;
+    height: 500px;
+    display: flex;
+    justify-content: center
+}
+
+.listaPacientes #listadoPacientes {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around
+}
+
+.flex-item {
+    background: rgb(141, 152, 164);
+    padding: 5px;
+    width: 100px;
+    height: 50px;
+    margin-top: 10px;
+
+    line-height: 20px;
+    color: white;
+    text-align: center;
+    list-style: none;
+}
+
+#listaPacientesDentalIsapre {
+    display: inline-block;
+}
+
+#listaPacientesTraumaFonasa {
+    display: inline-block;
+}
+
+.info {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    max-width: 70%;
+    margin-left: 6%;
+    margin-top: 2rem;
+}
+
+.first-last {
+    font-weight: bold;
+}
+
+.informaciones {
+    margin-left: 6%;
+    margin-top: 2rem;
+}
