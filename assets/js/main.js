@@ -58,11 +58,13 @@ const nombresDental = nombresPacientes(dental);
 const pacientesTotal = nombresRadiologia.concat(nombresTraumatologia, nombresDental);
 
 const listadoPacientes = document.querySelector('#listadoPacientes');
-pacientesTotal.forEach(nombre => {
-    const listItem = document.createElement('li');
-    listItem.textContent = nombre;
-    listadoPacientes.appendChild(listItem);
-});
+const renderPacientesTotal = () => {
+    listadoPacientes.innerHTML = ''
+    pacientesTotal.forEach((nombre) => {
+        listadoPacientes.innerHTML += `<li>${nombre}</li>`
+    })
+}
+renderPacientesTotal()
 
 //5. Filtrar aquellos pacientes que indican del de isapre en la lista médica de dental
 
@@ -75,7 +77,7 @@ const listaPacientesDentalIsapre = document.querySelector("#listaPacientesDental
 const renderDentalIsapre = () => {
     listaPacientesDentalIsapre.innerHTML = ''
     dentalIsapre.forEach((item) => {
-        listaPacientesDentalIsapre.innerHTML += `<p>${item.paciente}</p>`
+        listaPacientesDentalIsapre.innerHTML += `<li>${item.paciente}</li>`
     })
 }
 renderDentalIsapre()
@@ -91,7 +93,7 @@ const listaPacientesTraumaFonasa = document.querySelector("#listaPacientesTrauma
 const renderTraumaFonasa = () => {
     listaPacientesTraumaFonasa.innerHTML = ''
     traumatologiaFonasa.forEach((item) => {
-        listaPacientesTraumaFonasa.innerHTML += `<p>${item.paciente}</p>`
+        listaPacientesTraumaFonasa.innerHTML += `<li>${item.paciente}</li>`
     })
 }
 renderTraumaFonasa()
